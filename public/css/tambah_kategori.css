@@ -1,0 +1,82 @@
+/* Main container */
+.main-container {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px; /* Sesuaikan dengan kebutuhan */
+    height: 100vh; /* Supaya sidebar penuh sesuai tinggi layar */
+    position: fixed; /* Agar sidebar tetap di sebelah kiri */
+}
+
+.sidebar h4 {
+    font-weight: bold;
+    text-align: left;
+    padding: 15px;
+}
+
+.sidebar .nav-link {
+    font-size: 1.1rem;
+    color: #333;
+    padding: 10px 15px;
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f1f1f1;
+    color: #007bff;
+}
+
+/* Content */
+.content {
+    margin-left: 250px; /* Sesuaikan dengan lebar sidebar */
+    padding: 20px;
+    width: 100%;
+}
+
+/* Table Card */
+.table-card {
+    width: 80%; /* Adjust the width of the card to make it wider */
+    margin: 0 auto; /* Center the card on the page */
+}
+
+/* Make the table fill the card */
+.table-card .table {
+    width: 100%;
+}
+
+/* Optional: Adjust padding within table cells for better readability */
+.table-card .table td, .table-card .table th {
+    padding: 12px; /* Adjust padding as desired */
+}
+
+/* Info Cards */
+.info-card {
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.info-card h5 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333;
+}
+
+.info-card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.info-card i {
+    font-size: 24px;
+    color: #6c757d;
+}
+

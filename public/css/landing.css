@@ -1,0 +1,180 @@
+.logo_atas {
+    margin-right: 82px;
+    margin-top: 20px;
+}
+.masuk_daftar {
+    margin-left: 1020px;
+    display: flex;
+    gap: 10px;
+    
+}
+.container {
+    display: flex;
+    align-items: center; /* Untuk menyelaraskan secara vertikal */
+    justify-content: center;
+    margin-top: 10px; /* Untuk menyelaraskan secara horizontal */
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    transform: translateY(20px);
+    
+}
+.text {
+    font-weight: bold;
+    font-size: 160%;
+}
+.container_2 {
+    display: flex;
+    align-items: center; /* Untuk menyelaraskan secara vertikal */
+    justify-content: center;
+}
+.yukbarter {
+    margin-top: 70px;
+    margin-right: 350px;
+}
+.image_payment {
+    margin-right: 60px;
+    margin-top: 120px;
+}
+.fitur_kami {
+    text-align: center;
+    font-weight: bold;
+    font-size: 150%;
+}
+/* card landing */
+
+/* Kontainer untuk dua card */
+.card-container {
+    display: flex;
+    gap: 20px; /* Jarak antar card */
+    justify-content: center; /* Agar card berada di tengah */
+    padding: 20px;
+    max-width: 100%; /* Supaya kontainer penuh */
+}
+
+/* Card styling */
+.card {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: white;
+    width: 48%; /* Set lebar card ke 48% agar muat 2 card dalam satu baris */
+    box-sizing: border-box; /* Supaya padding tidak menambah lebar */
+}
+
+/* Gambar pada setiap card */
+.card-image {
+    flex-shrink: 0; /* Agar gambar tidak mengecil */
+    max-width: 100px; /* Batasi lebar gambar */
+}
+
+.card-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+/* Konten teks pada setiap card */
+.card-content {
+    margin-left: 20px; /* Jarak antara gambar dan teks */
+}
+
+.card-content h2 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* footer */
+/* FAQ Section */
+.faq-section {
+    text-align: center;
+    padding: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-section h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.faq-section p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* FAQ Item */
+.faq-item {
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    font-size: 14px;
+    color: #555;
+    padding-top: 10px;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 100px; /* Set max-height cukup besar untuk menampung jawaban */
+}
+
+.faq-item .arrow {
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .arrow {
+    transform: rotate(90deg);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: #555;
+}
+
+footer p {
+    margin: 5px 0;
+}
+
+/* animasi */
+/* Animasi fade-in */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.fade-in.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Konten yang ada di dalam div.fade-in di atas */
+.fade-in {
+    visibility: hidden; /* Sembunyikan konten saat pertama kali dimuat */
+}
+
+/* Pastikan untuk mengubah kelas di JavaScript saat halaman dimuat */
+
