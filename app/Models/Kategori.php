@@ -10,5 +10,9 @@ class Kategori extends Model
     use HasFactory;
 
     protected $table = 'kategori';
+    public function barangs()
+    {
+        return $this->hasMany(Upload::class, 'kategori_id');
+    }
     
 }

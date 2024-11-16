@@ -3,22 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YukBarter Dashboard</title>
+    <title>YukBarter - Detail Laporan</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/css/detail_validasi.css">
     <style>
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 10px; /* Space between the buttons and rating input */
-        }
-        .action-buttons input {
-            margin-bottom: 10px; /* Space below the rating input */
-        }
+       .action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Jarak antar tombol */
+}
+
         .card-body {
             padding: 20px;
         }
+        .card {
+            margin-top: 20px;
+        }
+        button {
+    padding: 10px 20px; /* Ruang dalam tombol */
+    font-size: 16px; /* Ukuran font agar lebih jelas */
+    border: none; /* Hilangkan border jika tidak diperlukan */
+    border-radius: 5px; /* Membuat sudut tombol sedikit melengkung */
+    text-align: center; /* Rata tengah teks */
+    white-space: nowrap; /* Mencegah teks terpotong jika terlalu panjang */
+    display: inline-block; /* Memastikan tombol tidak aneh dalam layout */
+}
+
+button.btn-success,
+button.btn-danger {
+    width: auto; /* Sesuaikan lebar dengan teks */
+    min-width: 120px; /* Tetapkan lebar minimum jika diperlukan */
+}
     </style>
 </head>
 <body>
@@ -30,14 +46,14 @@
                 <a class="nav-link" href="{{ route('admin.beranda') }}"><i class="fas fa-home"></i> Beranda</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.validasi') }}"><i class="fas fa-tasks"></i> Validasi</a>
+                <a class="nav-link" href="{{ route('reports.index') }}"><i class="fas fa-tasks"></i> Laporan</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="kategori"><i class="fas fa-th-large"></i> Kategori</a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a class="nav-link" href="rating"><i class="fas fa-star"></i> Rating</a>
-              </li>
+              </li> --}}
               <li class="nav-item">
                 <a class="nav-link" href="profile"><i class="fas fa-user"></i> Profil</a>
               </li>
@@ -45,43 +61,59 @@
           </div>
 
         <div class="main-content">
-            <!-- Back Button - Positioned independently above the content -->
             <div class="back-button rounded-pill">
                 <button class="btn btn-dark" onclick="history.back()">Kembali</button>
             </div>
 
-            <!-- Detail Content Section -->
             <div class="content">
                 <div class="container detail-container">
                     <div class="card">
                         <div class="card-body">
                             <div class="row">
-                                <!-- Item Details Section -->
-                                <div class="col-md-8 item-details">
-                                    <p><strong>Nama User</strong> : {{ $barang->user->name ?? 'Tidak Ditemukan' }}</p>
-                                    <p><strong>Nama Barang</strong> : {{ $barang->nama_barang }}</p>
-                                    <p><strong>Kategori</strong> : {{ $barang->kategori->nama ?? 'Tidak Ada Kategori' }}</p>
-                                    <p><strong>Nomor Whatsapp</strong>: {{ $barang->nomor_wa }}</p>
-                                    <p><strong>Deskripsi</strong> : {{ $barang->deskripsi }}</p>
-                                    
-                                    <div class="action-buttons mt-3">
-                                        <!-- Form untuk mengubah status barang -->
-                                        <form action="{{ route('admin.ubahStatus') }}" method="POST">
-                                            @csrf
-                                            <input type="hidden" name="barang_id" value="{{ $barang->id }}">
-                                            <label for="rating">Rating Kualitas Barang</label>
-                                            <input type="number" id="rating" name="rating" min="1" max="5" value="{{ $barang->rating ?? '' }}" class="form-control mb-3">
-
-                                            <!-- Pilihan untuk mengubah status -->
-                                            <button type="submit" name="status" value="disetujui" class="btn btn-success">Terima</button>
-                                            <button type="submit" name="status" value="ditolak" class="btn btn-danger">Tolak</button>
-                                        </form>
-                                    </div>
+                                <!-- Item Details -->
+                                <div class="col-md-8">
+                                    <h5>Detail Laporan</h5>
+                                    <p><strong>Nama User:</strong> {{ $barang->user->name ?? 'Tidak Ditemukan' }}</p>
+                                    <p><strong>Nama Barang:</strong> {{$report->barang->nama_barang ?? 'Tidak Ditemukan'}}</p>
+                                    {{-- <p><strong>Kategori:</strong> {{ $report->kategori->nama ?? 'Tidak Ada Kategori' }}</p> --}}
+                                    <p><strong>Deskripsi:</strong> {{ $report->barang->deskripsi }}</p>
+                                    <p><strong>Nomor WhatsApp:</strong> {{ $report->barang->nomor_wa }}</p>
+                                    <hr>
+                                    <h6>Detail Laporan</h6>
+                                    <p><strong>Pelapor:</strong> {{ $report->user->name ?? 'Anonim' }}</p>
+                                    <p><strong>Alasan:</strong> {{ $report->reason }}</p>
+                                    <p><strong>Keterangan Tambahan:</strong> {{ $report->additional_info ?? 'Tidak ada' }}</p>
                                 </div>
 
                                 <!-- Image Section -->
                                 <div class="col-md-4">
                                     <img src="{{ asset('storage/foto/' . $barang->foto) }}" alt="Image of {{ $barang->nama_barang }}" class="img-fluid item-image">
+
+                                </div>
+                            </div>
+
+                            <div class="row mt-4">
+                                <div class="col-md-8">
+                                    <div class="action-buttons d-flex flex-column gap-3">
+                                        <!-- Form untuk Menyelesaikan Laporan -->
+                                        <form action="{{ route('reports.resolve', $report->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="barang_id" value="{{ $report->id }}">
+                                            <button type="submit" name="action" value="resolve" class="btn btn-success">
+                                             Tandai Selesai
+                                            </button>
+                                        </form>
+
+                                        <!-- Form untuk Menghapus Barang -->
+                                        <form action="{{ route('reports.destroy', $report->id) }}" method="POST" onsubmit="return confirm('Apakah Anda yakin ingin menghapus barang ini?')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">
+                                                 Hapus Barang
+                                            </button>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -90,7 +122,7 @@
             </div>
 
             <footer class="text-center mt-4">
-                <p>&copy; 2024 All Right Reserved YukBarter.xyz</p>
+                <p>&copy; 2024 YukBarter. All rights reserved.</p>
             </footer>
         </div>
     </div>

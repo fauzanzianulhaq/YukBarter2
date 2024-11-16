@@ -14,17 +14,17 @@
         <h4 class="p-3">YukBarter</h4>
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link" href="beranda"><i class="fas fa-home"></i> Beranda</a>
+            <a class="nav-link" href="{{ route('admin.beranda') }}"><i class="fas fa-home"></i> Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="validasi"><i class="fas fa-tasks"></i> Validasi</a>
+            <a class="nav-link" href="{{ route('reports.index') }}"><i class="fas fa-tasks"></i> Laporan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="kategori"><i class="fas fa-th-large"></i> Kategori</a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" href="rating"><i class="fas fa-star"></i> Rating</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link" href="profile"><i class="fas fa-user"></i> Profil</a>
           </li>

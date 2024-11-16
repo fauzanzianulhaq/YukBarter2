@@ -7,6 +7,7 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Upload;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
@@ -52,16 +53,22 @@ Route::get('/berandaUser', function () {
 //     return view('admin.beranda');
 // })->name('admin.beranda')->middleware('role:admin');
 Route::get('/admin/beranda', [AdminController::class, 'upload'])->name('admin.beranda')->middleware('role:admin');
+Route::post('/report', [UserController::class, 'store'])->name('report.store');
+
 // Route::get('/admin/validasi', function () {
 //     return view('admin.validasi');
 // });
-Route::get('/admin/validasi', [AdminController::class, 'validasi'])->name('admin.validasi');
+// Route::get('/admin/validasi', [AdminController::class, 'validasi'])->name('admin.validasi');
+Route::get('/admin/reports', [ReportController::class, 'index'])->name('reports.index');
+Route::get('/admin/reports/{id}', [ReportController::class, 'show'])->name('reports.show');
+Route::patch('/admin/reports/{id}/resolve', [ReportController::class, 'resolve'])->name('reports.resolve');
+Route::delete('/admin/reports/{id}', [ReportController::class, 'destroy'])->name('reports.destroy');
 
-Route::get('/admin/validasi-detail/{id}', function ($id) {
-    $barang = Upload::findOrFail($id);
-    return view('admin.detail_validasi', compact('barang'));
-})->name('admin.validasi-detail');
-Route::post('/admin/ubah-status', [AdminController::class, 'ubahStatus'])->name('admin.ubahStatus');
+// Route::get('/admin/validasi-detail/{id}', function ($id) {
+//     $barang = Upload::findOrFail($id);
+//     return view('admin.detail_validasi', compact('barang'));
+// })->name('admin.validasi-detail');
+// Route::post('/admin/ubah-status', [AdminController::class, 'ubahStatus'])->name('admin.ubahStatus');
 
 
 
@@ -137,9 +144,11 @@ Route::post('/admin/update-password-user', [ProfileController::class, 'updatePas
 // });
 Route::get('/user/jelajahi-barang', [UserController::class, 'jelajahiBarang'])->name('jelajahiBarang');
 
-Route::get('/user/jelajahi-barang-detail', function () {
-    return view('user.detailBarang');
-});
+// Route::get('/user/jelajahi-barang-detail', function () {
+//     return view('user.detailBarang');
+// });
+Route::get('/user/jelajahi-barang-detail/{id}', [UserController::class, 'detail'])->name('barang.detail');
+
 
 Route::post('/custom-login', [SessionController::class, 'login'])->name('custom.login');
 

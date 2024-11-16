@@ -73,7 +73,7 @@
                                 @if($barang->foto)
                                 <div class="form-group">
                                 <label>Gambar Saat Ini:</label><br>
-                                <img src="{{ asset('storage/public/foto/' . $barang->foto) }}" alt="Gambar Barang" width="150">
+                                <img src="{{ asset('storage/foto/' . $barang->foto) }}" alt="Gambar Barang" width="150">
                                     </div>
                                     @endif
                                     <div class="form-group">

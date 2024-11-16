@@ -17,14 +17,14 @@
             <a class="nav-link" href="{{ route('admin.beranda') }}"><i class="fas fa-home"></i> Beranda</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ route('admin.validasi') }}"><i class="fas fa-tasks"></i> Validasi</a>
+            <a class="nav-link" href="{{ route('reports.index') }}"><i class="fas fa-tasks"></i> Laporan</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="kategori"><i class="fas fa-th-large"></i> Kategori</a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" href="rating"><i class="fas fa-star"></i> Rating</a>
-          </li>
+          </li> --}}
           <li class="nav-item">
             <a class="nav-link" href="profile"><i class="fas fa-user"></i> Profil</a>
           </li>
@@ -34,31 +34,43 @@
           <div class="container-fluid">
               <div class="card">
                   <div class="card-header d-flex justify-content-between align-items-center">
-                      <h5>Validasi Barang</h5>
+                      <h5>Laporan</h5>
                   </div>
                   <div class="card-body">
                       <table class="table table-bordered table-striped">
                           <thead>
                               <tr>
                                 <th>No</th>
-                                <th>Nama Barang</th>
-                                <th>Kategori</th>
-                                <th>Nama User</th>
-                                <th>Status</th>
-                                <th>Detail</th>
+                              <th>Barang</th>
+                              <th>Pelapor</th>
+                              <th>Alasan</th>
+                              <th>Tanggal Laporan</th>
+                              <th>Opsi</th>
                               </tr>
                           </thead>
                           <tbody>
-                              @foreach($barangPending as $index => $barang)
-                              <tr>
-                                <td>{{ $index + 1 }}</td>
-                                <td>{{ $barang->nama_barang }}</td>
-                                <td>{{ $barang->kategori->nama ?? 'Kategori Tidak Ditemukan' }}</td>
-                                <td>{{ $barang->user->name ?? 'User Tidak Ditemukan' }}</td>
-                                <td><button type="button" class="btn btn-warning">{{ ucfirst($barang->status) }}</button></td>
-                                <td><a href="{{ route('admin.validasi-detail', $barang->id) }}">Lihat</a></td>
-                              </tr>
-                              @endforeach
+                            @foreach($reports as $no=>$report)
+                            <tr>
+                                <td>{{ $no+1 }}</td>
+                                <td>{{ $report->barang->nama_barang }}</td>
+                                <td>{{ $report->user->name }}</td>
+                                <td>{{ $report->reason }}</td>
+                                <td>{{ $report->created_at }}</td>
+                                <td>
+                                    <a href="{{ route('reports.show', $report->id) }}" class="btn btn-info">Lihat Detail</a>
+                                    <form action="{{ route('reports.resolve', $report->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="btn btn-success">Tindak Lanjuti</button>
+                                    </form>
+                                    <form action="{{ route('reports.destroy', $report->id) }}" method="POST" style="display:inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger">Hapus</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
                           </tbody>
                       </table>
                       <nav aria-label="Page navigation">

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Upload;
 use App\Models\Kategori;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Log;
 
 
 use Illuminate\Http\Request;
@@ -14,30 +16,33 @@ class UploadController extends Controller
          $upload = Upload::get();
         return view('user.beranda', compact('upload'));
     }
-public function submit(Request $request)
+    public function submit(Request $request)
 {
     // Validasi input
-    $request->validate([
+    $validatedData = $request->validate([
         'nama_barang' => 'required|string|max:255',
         'nomor_wa' => 'required|string|max:15',
         'deskripsi' => 'required|string',
         'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
-        'kategori_id' => 'required|exists:kategori,id'
+        'kategori_id' => 'required|exists:kategori,id',
     ]);
 
-    // Buat instance baru dari model Upload
+    // Cek apakah barang aneh
+    $isStrange = $this->isItemStrange($validatedData['deskripsi']);
+
+    // Tentukan status berdasarkan barang aneh
+    $status = $isStrange ? 'ditolak' : 'disetujui';
+
+    // Simpan barang
     $upload = new Upload();
-    $upload->nama_barang = $request->nama_barang;
-    $upload->nomor_wa = $request->nomor_wa;
-    $upload->deskripsi = $request->deskripsi;
-    $upload->kategori_id = $request->kategori_id;
-
-    // Menambahkan user_id yang diambil dari user yang sedang login
+    $upload->nama_barang = $validatedData['nama_barang'];
+    $upload->nomor_wa = $validatedData['nomor_wa'];
+    $upload->deskripsi = $validatedData['deskripsi'];
+    $upload->kategori_id = $validatedData['kategori_id'];
     $upload->user_id = auth()->user()->id;
+    $upload->status = $status;
 
-    // Status di-set default 'pending' jika tidak diinput
-    $upload->status = 'pending'; // Status default
-
+    // Simpan gambar
     if ($request->hasFile('foto')) {
         $file = $request->file('foto');
         $filename = time() . '_' . $file->getClientOriginalName();
@@ -48,8 +53,34 @@ public function submit(Request $request)
     // Simpan data ke database
     $upload->save();
 
-    return redirect('/user/beranda')->with('success', 'Data barang berhasil ditambahkan!');
+    // Pesan berdasarkan status
+    $message = $isStrange ? 'Barang ditolak karena tidak sesuai.' : 'Barang berhasil dikirim!';
+    return redirect('/user/beranda')->with('status', $message);
 }
+
+// Fungsi untuk menentukan apakah barang aneh
+private function isItemStrange($description)
+{
+    // Logika untuk menentukan apakah barang aneh berdasarkan deskripsi atau kriteria lainnya
+    $strangeKeywords = ['tidak sesuai', 'cacat', 'rusak']; // Contoh kata kunci
+    foreach ($strangeKeywords as $keyword) {
+        if (strpos(strtolower($description), strtolower($keyword)) !== false) {
+            return true; // Barang dianggap aneh
+        }
+    }
+    return false; // Barang tidak aneh
+}
+
+
+    /**
+     * Periksa kualitas gambar
+     * @param string $imagePath
+     * @return int (kualitas antara 0-100)
+     */
+    
+   
+    
+    
 // function edit($id){
 //     $upload = Upload::find($id);
 //     return view('user.edit_upload', compact('upload'));

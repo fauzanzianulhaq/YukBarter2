@@ -26,6 +26,40 @@
     </style>
 </head>
 <body>
+    <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportModalLabel">Laporkan Postingan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="reportForm" action="{{ route('report.store') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="post_id" id="reportPostId">
+                        <div class="form-group">
+                            <label for="reportReason">Alasan Pelaporan</label>
+                            <select class="form-control" id="reportReason" name="reason" required>
+                                <option value="">Pilih alasan</option>
+                                <option value="inappropriate">Barang tidak sesuai kategori</option>
+                                <option value="spam">Konten melanggar aturan</option>
+                                <option value="fake">Informasi tidak benar</option>
+                                <option value="other">Lainnya</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="reportAdditionalInfo">Keterangan Tambahan (opsional)</label>
+                            <textarea class="form-control" id="reportAdditionalInfo" name="additional_info" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-danger">Kirim Laporan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="main-container">
         <div class="sidebar bg-light border-right">
             <img src="/images/logo_yukbarter.png" alt="" width="190px" class="logo_atas">
@@ -56,26 +90,23 @@
             <div class="container my-5">
                 <div class="row">
                     @foreach($barang as $item)
-                    <div class="col-md-3">
+                    <div class="col-md-3 mb-5">
                         <div class="card">
                             <div class="card-body text-center">
                                 <h5 class="card-title">{{ $item->nama_barang }}</h5>
                                 <img src="{{ asset('storage/foto/' . $item->foto) }}" alt="Image of {{ $item->nama_barang }}" class="img-fluid item-image">
-                                <div class="rating">
-                                    @for ($i = 1; $i <= 5; $i++)
-                                        @if ($i <= $item->rating)
-                                            <i class="fas fa-star"></i>
-                                        @else
-                                            <i class="far fa-star"></i>
-                                        @endif
-                                    @endfor
-                                </div>
                             </div>
                             <div class="card-footer-0">
-                                <a href="jelajahi-barang-detail" class="btn btn-custom" id="detailBtn">Detail Barang</a>
+                                <a href="{{ route('barang.detail', $item->id) }}" class="btn btn-custom">Detail Barang</a>
                             </div>
                             <div class="card-footer">
-                                <a href="https://wa.me/6283818988014?text=Halo,%20saya%20tertarik%20dengan%20iMac%20Late%202015%20yang%20Anda%20jual." target="_blank" class="btn btn-custom">Chat Pemilik</a>
+                                <a href="https://wa.me/6283818988014?text=Halo,%20saya%20tertarik%20dengan%20{{ $item->nama_barang }}" 
+                                   target="_blank" class="btn btn-custom">Chat Pemilik</a>
+                                <button class="btn btn-warning btn-sm mt-2" data-toggle="modal" 
+                                        data-target="#reportModal" 
+                                        onclick="setReportData({{ $item->id }}, '{{ $item->nama_barang }}')">
+                                    <i class="fas fa-exclamation-circle"></i> Laporkan
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -85,5 +116,15 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fak
+    <!-- Memuat jQuery terlebih dahulu -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Memuat Popper.js dan Bootstrap JS setelah jQuery -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.min.js"></script>
+    <script>
+        function setReportData(barangId, barangName) {
+    $('#reportPostId').val(barangId); // ID barang dari tabel 'barang'
+    $('#reportModalLabel').text(`Laporkan Postingan: ${barangName}`);
+}
+    </script>
+    
