@@ -13,7 +13,7 @@ class ReportController extends Controller
     {
         $reports = Report::with('barang', 'user') // Mengambil laporan beserta data barang dan user yang melaporkan
                         ->whereNull('resolved_at') // Menampilkan laporan yang belum ditangani
-                        ->get();
+                        ->paginate(10);
 
         return view('admin.validasi', compact('reports'));
     }

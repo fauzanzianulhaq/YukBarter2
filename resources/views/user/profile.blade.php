@@ -28,7 +28,7 @@
         <div class="profile-header">
           <div style="margin-right: 650px">
             <div class="profile-info" style="margin-right: 90px">
-              <img src="{{ asset('storage/uploads/foto_ktm/' . $user->foto_ktm) }}" alt="Image of avatar">
+              <img src="{{ asset('storage/uploads/' . $user->foto_ktm) }}" alt="Image of avatar">
                 <div class="profile-details">
                     <h3>{{ $user->name ?? 'Tidak Ada Nama' }}</h3>
                     <p>{{ $user->email ?? 'Tidak Ada Email' }}</p>

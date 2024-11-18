@@ -38,9 +38,16 @@
                         <a href="kategori/tambah"><button class="btn btn-dark"><i class="fas fa-plus"></i> Tambah</button></a>
                     </div>
                     <div class="card-body">
+                        <form action="{{ route('kategori') }}" method="GET">
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Cari Berdasarkan Nama Kategori">
+                            <input ttype="text" 
+                            id="search-barang" 
+                            name="search" 
+                            class="form-control mr-2" 
+                            placeholder="Cari Nama Kategori..." 
+                            value="{{ request('search') ?? '' }}">
                         </div>
+                        </form>
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
@@ -51,39 +58,60 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($kategori as $no=>$data)
-                                <tr>
-                                    <td>{{ $no+1 }}</td>
-                                    <td>{{ $data->nama }}</td>
-                                    <td>
-                                        <div class="button-group">
-                                            <a href="{{ route('kategori.edit', $data->id) }}">
-                                                <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></button>
-                                            </a>
-                                            <form action="{{ route('kategori.delete', $data->id) }}" method="POST" style="display: inline;">
-                                                @csrf
-                                                <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
-                                            </form>
-                                        </div>
-                                    </td>
-                                    
-                                </tr>
-                                @endforeach
+                                @foreach ($kategori as $no => $data)
+    <tr>
+        <!-- Nomor urut yang benar berdasarkan halaman -->
+        <td>{{ $kategori->firstItem() + $no }}</td>
+        <td>{{ $data->nama }}</td>
+        <td>
+            <div class="button-group">
+                <a href="{{ route('kategori.edit', $data->id) }}">
+                    <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-edit"></i></button>
+                </a>
+                <form action="{{ route('kategori.delete', $data->id) }}" method="POST" style="display: inline;">
+                    @csrf
+                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                </form>
+            </div>
+        </td>
+    </tr>
+@endforeach
+
                             </tbody>
                         </table>
-                        <nav aria-label="Page navigation">
-                            <ul class="pagination justify-content-center">
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Previous</a>
-                                </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
-                                </li>
-                                <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
+                        <!-- Custom Pagination -->
+<nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <!-- Previous Page Link -->
+        @if ($kategori->onFirstPage())
+        <li class="page-item disabled">
+            <span class="page-link">Previous</span>
+        </li>
+        @else
+        <li class="page-item">
+            <a class="page-link" href="{{ $kategori->previousPageUrl() }}" aria-label="Previous">Previous</a>
+        </li>
+        @endif
+
+        <!-- Pagination Links -->
+        @foreach ($kategori->getUrlRange(1, $kategori->lastPage()) as $page => $url)
+        <li class="page-item {{ $kategori->currentPage() == $page ? 'active' : '' }}">
+            <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+        </li>
+        @endforeach
+
+        <!-- Next Page Link -->
+        @if ($kategori->hasMorePages())
+        <li class="page-item">
+            <a class="page-link" href="{{ $kategori->nextPageUrl() }}" aria-label="Next">Next</a>
+        </li>
+        @else
+        <li class="page-item disabled">
+            <span class="page-link">Next</span>
+        </li>
+        @endif
+    </ul>
+</nav>
                     </div>
                 </div>
             </div>

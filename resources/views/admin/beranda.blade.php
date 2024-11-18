@@ -96,7 +96,7 @@
                 <tbody>
                   @foreach ($upload as $no => $data)
                   <tr>
-                    <td>{{ $no+1 }}</td>
+                    <td>{{ $upload->firstItem() + $no }}</td>
                     <td>{{ $data->nama_barang }}</td>
                      <td>{{ $data->kategori->nama }}</td>
                     <td>{{ $data->user->name }}</td>
@@ -106,17 +106,36 @@
               </table>
               <nav aria-label="Page navigation">
                 <ul class="pagination justify-content-center">
-                  <li class="page-item">
-                    <a class="page-link" href="#">Previous</a>
-                  </li>
-                  <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                  </li>
+                    <!-- Previous Page Link -->
+                    @if ($upload->onFirstPage())
+                    <li class="page-item disabled">
+                        <span class="page-link">Previous</span>
+                    </li>
+                    @else
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $upload->previousPageUrl() }}" aria-label="Previous">Previous</a>
+                    </li>
+                    @endif
+            
+                    <!-- Pagination Links -->
+                    @foreach ($upload->getUrlRange(1, $upload->lastPage()) as $page => $url)
+                    <li class="page-item {{ $upload->currentPage() == $page ? 'active' : '' }}">
+                        <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                    </li>
+                    @endforeach
+            
+                    <!-- Next Page Link -->
+                    @if ($upload->hasMorePages())
+                    <li class="page-item">
+                        <a class="page-link" href="{{ $upload->nextPageUrl() }}" aria-label="Next">Next</a>
+                    </li>
+                    @else
+                    <li class="page-item disabled">
+                        <span class="page-link">Next</span>
+                    </li>
+                    @endif
                 </ul>
-              </nav>
+            </nav>
             </div>
           </div>
         </div>

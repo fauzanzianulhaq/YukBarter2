@@ -19,7 +19,7 @@ class AdminController extends Controller
     public function upload()
 {
     // Mengambil data barang hanya untuk hari ini
-    $upload = Upload::whereDate('created_at', now()->toDateString())->get();
+    $upload = Upload::whereDate('created_at', now()->toDateString())->paginate(5);
 
     // Menghitung jumlah total postingan hari ini
     $todayPosts = $upload->count();

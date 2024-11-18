@@ -72,15 +72,34 @@
                         </table>
                         <nav aria-label="Page navigation">
                             <ul class="pagination justify-content-center">
+                                <!-- Previous Page Link -->
+                                @if ($barangs->onFirstPage())
+                                <li class="page-item disabled">
+                                    <span class="page-link">Previous</span>
+                                </li>
+                                @else
                                 <li class="page-item">
-                                    <a class="page-link" href="#">Previous</a>
+                                    <a class="page-link" href="{{ $barangs->previousPageUrl() }}" aria-label="Previous">Previous</a>
                                 </li>
-                                <li class="page-item active">
-                                    <a class="page-link" href="#">1</a>
+                                @endif
+                        
+                                <!-- Pagination Links -->
+                                @foreach ($barangs->getUrlRange(1, $barangs->lastPage()) as $page => $url)
+                                <li class="page-item {{ $barangs->currentPage() == $page ? 'active' : '' }}">
+                                    <a class="page-link" href="{{ $url }}">{{ $page }}</a>
                                 </li>
+                                @endforeach
+                        
+                                <!-- Next Page Link -->
+                                @if ($barangs->hasMorePages())
                                 <li class="page-item">
-                                    <a class="page-link" href="#">Next</a>
+                                    <a class="page-link" href="{{ $barangs->nextPageUrl() }}" aria-label="Next">Next</a>
                                 </li>
+                                @else
+                                <li class="page-item disabled">
+                                    <span class="page-link">Next</span>
+                                </li>
+                                @endif
                             </ul>
                         </nav>
                     </div>

@@ -85,7 +85,7 @@ Route::get('/admin/kategori/tambah', function () {
 // Route::get('/admin/kategori', function () {
 //     return view('admin.kategori');
 // });
-Route::get('/admin/kategori', [KategoriController::class, 'kategori']);
+Route::get('/admin/kategori', [KategoriController::class, 'kategori'])->name('kategori');
 Route::post('/admin/kategori/tambah/submit', [KategoriController::class, 'submit'])->name('kategori.submit');
 Route::get('/admin/kategori/edit/{id}', [KategoriController::class, 'edit'])->name('kategori.edit');
 Route::post('/admin/kategori/update/{id}', [KategoriController::class, 'update'])->name('kategori.update');

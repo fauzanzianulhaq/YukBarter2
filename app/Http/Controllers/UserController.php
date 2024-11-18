@@ -12,19 +12,28 @@ class UserController extends Controller
     public function index()
 {
     // Ambil barang yang di-upload oleh user yang sedang login
-    $barangs = Upload::where('user_id', Auth::id())->get();
+    $barangs = Upload::where('user_id', Auth::id())->paginate(5);
 
     // Kirimkan data barang ke view
     return view('user.beranda', compact('barangs'));
 }
-public function jelajahiBarang()
+public function jelajahiBarang(Request $request)
 {
+    $search = $request->input('search'); // Ambil input pencarian
+
+    // Query barang dengan status 'disetujui'
     $barang = Upload::where('status', 'disetujui')
-                    ->select('id', 'nama_barang', 'rating') // Pilih hanya data yang diperlukan
+                    ->when($search, function ($query) use ($search) {
+                        $query->where('nama_barang', 'LIKE', "%{$search}%")
+                              ->orWhere('rating', 'LIKE', "%{$search}%"); // Tambahkan kondisi pencarian
+                    })
+                    ->select('id', 'nama_barang', 'rating', 'foto') // Pilih kolom yang dibutuhkan
                     ->get();
 
-    return view('user.jelajahiBarang', compact('barang'));
+    return view('user.jelajahiBarang', compact('barang', 'search'));
 }
+
+
 // public function detailBarang($id)
 // {
 //     // Mengambil data barang berdasarkan ID

@@ -51,7 +51,7 @@
                           <tbody>
                             @foreach($reports as $no=>$report)
                             <tr>
-                                <td>{{ $no+1 }}</td>
+                                <td>{{ $reports->firstItem() + $no }}</td>
                                 <td>{{ $report->barang->nama_barang }}</td>
                                 <td>{{ $report->user->name }}</td>
                                 <td>{{ $report->reason }}</td>
@@ -74,18 +74,37 @@
                           </tbody>
                       </table>
                       <nav aria-label="Page navigation">
-                          <ul class="pagination justify-content-center">
-                              <li class="page-item">
-                                  <a class="page-link" href="#">Previous</a>
-                              </li>
-                              <li class="page-item active">
-                                  <a class="page-link" href="#">1</a>
-                              </li>
-                              <li class="page-item">
-                                  <a class="page-link" href="#">Next</a>
-                              </li>
-                          </ul>
-                      </nav>
+                        <ul class="pagination justify-content-center">
+                            <!-- Previous Page Link -->
+                            @if ($reports->onFirstPage())
+                            <li class="page-item disabled">
+                                <span class="page-link">Previous</span>
+                            </li>
+                            @else
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $reports->previousPageUrl() }}" aria-label="Previous">Previous</a>
+                            </li>
+                            @endif
+                    
+                            <!-- Pagination Links -->
+                            @foreach ($reports->getUrlRange(1, $reports->lastPage()) as $page => $url)
+                            <li class="page-item {{ $reports->currentPage() == $page ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $url }}">{{ $page }}</a>
+                            </li>
+                            @endforeach
+                    
+                            <!-- Next Page Link -->
+                            @if ($reports->hasMorePages())
+                            <li class="page-item">
+                                <a class="page-link" href="{{ $reports->nextPageUrl() }}" aria-label="Next">Next</a>
+                            </li>
+                            @else
+                            <li class="page-item disabled">
+                                <span class="page-link">Next</span>
+                            </li>
+                            @endif
+                        </ul>
+                    </nav>
                   </div>
               </div>
           </div>

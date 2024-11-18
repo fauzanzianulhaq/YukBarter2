@@ -80,8 +80,14 @@
             <nav class="navbar" style="background-color: #edf5ff;">
                 <div class="container-fluid">
                     <a class="navbar-brand"></a>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Cari Barang di sini" aria-label="Search">
+                    <form class="d-flex" role="search" action="{{ route('jelajahiBarang') }}" method="GET">
+                        <input 
+                    type="text" 
+                    id="search-barang" 
+                    name="search" 
+                    class="form-control mr-2" 
+                    placeholder="Cari Barang..." 
+                    value="{{ request('search') ?? '' }}">
                         <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i> Cari</button>
                     </form>
                 </div>

@@ -14,10 +14,19 @@ class KategoriController extends Controller
 
         return redirect('/admin/kategori');
     }
-    function kategori(){
-        $kategori = Kategori::get();
-        return view('admin.kategori', compact('kategori'));
-    }
+    public function kategori(Request $request)
+{
+    $search = $request->input('search');
+
+    // Ambil data kategori dengan pagination, sesuaikan jumlah item per halaman
+    $kategori = Kategori::when($search, function ($query) use ($search) {
+        $query->where('nama', 'LIKE', "%{$search}%");
+    })
+    ->paginate(5);  // 10 adalah jumlah kategori per halaman
+
+    return view('admin.kategori', compact('kategori', 'search'));
+}
+
     function edit($id){
         $kategori = Kategori::find($id);
         return view('admin.edit_kategori', compact('kategori'));
