@@ -40,26 +40,26 @@
         {{-- card  --}}
         <div class="card-container">
             <div class="card">
-                <div class="card-image">
-                    <img src="your-image-url1.jpg" alt="Image 1" />
-                </div>
+                {{-- <div class="card-image">
+                    <img src="/images/payment.png" alt="Image 1" />
+                </div> --}}
                 <div class="card-content">
                     <h2>Jelajahi Barang</h2>
                     <p>Fitur Jelajahi Barang memungkinkan pengguna mencari dan menemukan barang yang ditawarkan oleh orang lain, memudahkan proses barter dengan kategori yang beragam.</p>
                 </div>
             </div>
             <div class="card">
-                <div class="card-image">
+                {{-- <div class="card-image">
                     <img src="your-image-url2.jpg" alt="Image 2" />
-                </div>
+                </div> --}}
                 <div class="card-content">
-                    <h2>Jelajahi Barang</h2>
-                    <p>Fitur Jelajahi Barang memungkinkan pengguna mencari dan menemukan barang yang ditawarkan oleh orang lain, memudahkan proses barter dengan kategori yang beragam.</p>
+                    <h2>Kategori Barang</h2>
+                    <p>Fitur Kategori Barang membagi barang yang tersedia ke dalam kelompok-kelompok tertentu, seperti elektronik, pakaian, dan peralatan rumah tangga.</p>
                 </div>
             </div>
         </div>
         
-        <div class="card-container">
+        {{-- <div class="card-container">
             <div class="card">
                 <div class="card-image">
                     <img src="your-image-url1.jpg" alt="Image 1" />
@@ -78,7 +78,7 @@
                     <p>Fitur Jelajahi Barang memungkinkan pengguna mencari dan menemukan barang yang ditawarkan oleh orang lain, memudahkan proses barter dengan kategori yang beragam.</p>
                 </div>
             </div>
-        </div>
+        </div> --}}
 
         {{-- footer --}}
         <div class="faq-section">

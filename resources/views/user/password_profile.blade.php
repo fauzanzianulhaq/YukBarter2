@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YukBarter</title>
+    <title>YukBarter Password</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="/css/user/passwordUser.css">
@@ -27,16 +27,16 @@
       <div class="profile-container">
         <div class="profile-header">
           <div style="margin-right: 650px">
-            <div class="profile-info" style="margin-right: 90px">
+            {{-- <div class="profile-info" style="margin-right: 90px">
                 <img src="https://via.placeholder.com/80" alt="User Avatar" class="avatar">
                 <div class="profile-details">
                     <h3>{{ $user->name ?? 'Tidak Ada Nama' }}</h3>
                     <p>{{ $user->email ?? 'Tidak Ada Email' }}</p>
                 </div>
-            </div>
+            </div> --}}
             <div class="profile-tabs">
                 <a href="profile"><button class="tab ">Profil</button></a>
-                <a href="profile-avatar"><button class="tab">Avatar</button></a>
+                {{-- <a href="profile-avatar"><button class="tab">Avatar</button></a> --}}
                 <button class="tab active">Ubah Password</button>
             </div>
         </div>
