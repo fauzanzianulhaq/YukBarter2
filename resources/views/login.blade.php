@@ -27,10 +27,10 @@
                     <span class="toggle-password">&#128065;</span>
                 </div>
                 
-                <div class="remember-forgot">
+                {{-- <div class="remember-forgot">
                     <label><input type="checkbox"> Ingat Saya?</label>
-                    <a href="#">Lupa Password?</a>
-                </div>
+                    <a href="password/reset">Lupa Password?</a>
+                </div> --}}
                 
                 <button name="submit" type="submit">Masuk</button>
             </form>

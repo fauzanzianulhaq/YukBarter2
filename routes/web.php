@@ -9,7 +9,9 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Models\Upload;
+use Illuminate\Support\Facades\Password;
 use Symfony\Component\HttpFoundation\File\Exception\UploadException;
 
 /*
@@ -32,6 +34,14 @@ Route::get('/', function () {
 Route::get('/login', function () {
     return view('login');
 })->name('login');
+
+// Route::get('password/reset', [ResetPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+// Route::post('password/email', [ResetPasswordController::class, 'sendResetLinkEmail'])->name('password.email');
+// Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+// Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
+
+
+
 
 // Route::get('/daftar', function () {
 //     return view('daftar');
