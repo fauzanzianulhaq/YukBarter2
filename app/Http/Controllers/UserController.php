@@ -27,7 +27,7 @@ public function jelajahiBarang(Request $request)
                         $query->where('nama_barang', 'LIKE', "%{$search}%")
                               ->orWhere('rating', 'LIKE', "%{$search}%"); // Tambahkan kondisi pencarian
                     })
-                    ->select('id', 'nama_barang', 'rating', 'foto') // Pilih kolom yang dibutuhkan
+                    ->select('id', 'nama_barang', 'nomor_wa', 'rating', 'foto') // Pilih kolom yang dibutuhkan
                     ->get();
 
     return view('user.jelajahiBarang', compact('barang', 'search'));
@@ -69,6 +69,20 @@ public function detail($id)
     // Kirim data barang ke view
     return view('user.detailBarang', compact('barang'));
 }
+
+//TES
+// public function barangIndex()
+// {
+//     $barang = Upload::where('status', 'disetujui')
+//     ->get()
+//     ->map(function ($item) {
+//         $item->is_valid_wa = preg_match('/^\d+$/', $item->nomor_wa);
+//         return $item;
+//     });
+
+//     $barang = Upload::where('status', 'disetujui')->get(); // Pastikan 'status' disetujui
+//     return view('user.jelajahiBarang', compact('barang'));
+// }
 
 
 

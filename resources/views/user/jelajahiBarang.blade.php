@@ -106,7 +106,7 @@
                                 <a href="{{ route('barang.detail', $item->id) }}" class="btn btn-custom">Detail Barang</a>
                             </div>
                             <div class="card-footer">
-                                <a href="https://wa.me/6283818988014?text=Halo,%20saya%20tertarik%20dengan%20{{ $item->nama_barang }}" 
+                                <a href="https://wa.me/{{$item->nomor_wa}}?text=Halo,%20saya%20tertarik%20dengan%20{{ $item->nama_barang }}" 
                                    target="_blank" class="btn btn-custom">Chat Pemilik</a>
                                 <button class="btn btn-warning btn-sm mt-2" data-toggle="modal" 
                                         data-target="#reportModal" 

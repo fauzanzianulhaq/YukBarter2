@@ -21,7 +21,7 @@ class UploadController extends Controller
     // Validasi input
     $validatedData = $request->validate([
         'nama_barang' => 'required|string|max:255',
-        'nomor_wa' => 'required|string|max:15',
+        'nomor_wa' => 'required|digits_between:10,15',
         'deskripsi' => 'required|string',
         'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
         'kategori_id' => 'required|exists:kategori,id',
@@ -110,13 +110,14 @@ public function update(Request $request, $id)
     // Validasi input
     $request->validate([
         'nama_barang' => 'required|string|max:255',
-        'nomor_wa' => 'required|string|max:15',
+        'nomor_wa' => 'required|digits_between:10,15',
         'deskripsi' => 'required|string',
         'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024',
         'kategori_id' => 'required|exists:kategori,id'
     ]);
 
     $barang = Upload::findOrFail($id); // Cari data barang berdasarkan ID
+
 
     // Update data barang
     $barang->nama_barang = $request->nama_barang;
