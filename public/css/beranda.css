@@ -63,3 +63,70 @@
     font-size: 24px;
     color: #6c757d;
 }
+/* Responsif - Mobile */
+@media (max-width: 767px) {
+    /* Sidebar */
+    .sidebar {
+        width: 100%; /* Sidebar menjadi 100% lebar layar */
+        height: auto; /* Sidebar tidak mengisi seluruh tinggi layar */
+        position: relative; /* Agar tidak tetap di sisi kiri */
+    }
+
+    .sidebar .nav-link {
+        font-size: 1rem;
+        padding: 8px 10px;
+    }
+
+    /* Content */
+    .content {
+        margin-left: 0; /* Menghilangkan margin kiri karena sidebar sudah penuh */
+        padding: 15px;
+    }
+
+    /* Info Cards */
+    .info-card {
+        width: 100%; /* Kartu info mengisi lebar 100% */
+        margin-bottom: 10px;
+    }
+}
+
+/* Responsif - Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+    /* Sidebar */
+    .sidebar {
+        width: 200px; /* Lebar sidebar sedikit lebih kecil di tablet */
+    }
+
+    .sidebar .nav-link {
+        font-size: 1.1rem;
+        padding: 10px 12px;
+    }
+
+    /* Content */
+    .content {
+        margin-left: 200px; /* Sesuaikan dengan lebar sidebar */
+        padding: 20px;
+    }
+
+    /* Info Cards */
+    .info-card {
+        width: 48%; /* Kartu info dua kolom */
+        margin-right: 2%;
+    }
+}
+
+/* Responsif - Desktop */
+@media (min-width: 1024px) {
+    /* Sidebar */
+    .sidebar {
+        width: 250px; /* Lebar sidebar default */
+    }
+
+    .sidebar .nav-link {
+        font-size: 1.1rem;
+        padding: 10px 15px;
+    }
+
+    /* Content */
+   
+}

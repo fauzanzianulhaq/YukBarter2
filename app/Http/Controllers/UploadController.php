@@ -20,10 +20,10 @@ class UploadController extends Controller
 {
     // Validasi input
     $validatedData = $request->validate([
-        'nama_barang' => 'required|string|max:255',
+        'nama_barang' => 'required|string|max:40',
         'nomor_wa' => 'required|digits_between:10,15',
         'deskripsi' => 'required|string',
-        'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:1024',
+        'foto' => 'required|image|mimes:jpeg,png,jpg,gif|max:8024',
         'kategori_id' => 'required|exists:kategori,id',
     ]);
 

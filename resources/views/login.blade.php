@@ -24,7 +24,7 @@
                 <label for="password">Password</label>
                 <div class="password-container">
                     <input type="password" id="password" name="password" placeholder="Password" required>
-                    <span class="toggle-password">&#128065;</span>
+                    {{-- <span class="toggle-password">&#128065;</span> --}}
                 </div>
                 
                 {{-- <div class="remember-forgot">

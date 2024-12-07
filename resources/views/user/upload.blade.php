@@ -128,6 +128,38 @@
             });
         });
     </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+          const menuToggle = document.createElement('button');
+          menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+          menuToggle.classList.add('btn', 'btn-outline-secondary', 'd-md-none');
+          menuToggle.style.position = 'fixed';
+          menuToggle.style.top = '10px';
+          menuToggle.style.left = '10px';
+          menuToggle.style.zIndex = '1100';
+  
+          menuToggle.addEventListener('click', function () {
+              const sidebar = document.querySelector('.sidebar');
+              sidebar.classList.toggle('show');
+          });
+  
+          document.body.prepend(menuToggle);
+  
+          // Close sidebar when clicking outside
+          document.addEventListener('click', function (event) {
+              const sidebar = document.querySelector('.sidebar');
+              const menuToggle = document.querySelector('button');
+  
+              if (!sidebar.contains(event.target) &&
+                  !menuToggle.contains(event.target) &&
+                  sidebar.classList.contains('show') &&
+                  window.innerWidth < 768) {
+                  sidebar.classList.remove('show');
+              }
+          });
+      });
+  </script>
+  
 
 </body>
 </html>

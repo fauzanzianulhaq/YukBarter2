@@ -86,3 +86,78 @@
     margin-left: 15px;
     margin-bottom: 10px;
 }
+/* General Reset and Styling */
+body {
+    overflow-x: hidden;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.sidebar .logo_atas {
+    max-width: 190px;
+    margin: 20px 15px 10px;
+}
+
+.sidebar .nav-link {
+    font-size: 1.1rem;
+    color: #333;
+    padding: 10px 15px;
+}
+
+.sidebar .nav-link i {
+    margin-right: 10px;
+}
+
+.sidebar .nav-link:hover {
+    background-color: #f1f1f1;
+    color: #007bff;
+}
+
+/* Content Area */
+.content {
+    margin-left: 250px;
+    padding: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 767px) {
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 1050;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .btn-dark {
+        display: block;
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
+@media (min-width: 768px) {
+    .sidebar {
+        transform: translateX(0);
+    }
+}
