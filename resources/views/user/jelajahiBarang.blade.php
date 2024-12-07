@@ -62,7 +62,7 @@
     
     <div class="main-container">
         <div class="sidebar bg-light border-right">
-            <img src="/images/logo_yukbarter.png" alt="" width="190px" class="logo_atas">
+            <img src="/images/logo_yukbarter.png" alt="" class="logo_atas">
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="beranda"><i class="fas fa-home"></i> Beranda</a>
@@ -75,28 +75,27 @@
                 </li>
             </ul>
         </div>
-
+    
         <div class="content">
-            <nav class="navbar" style="background-color: #edf5ff;">
-                <div class="container-fluid">
-                    <a class="navbar-brand"></a>
-                    <form class="d-flex" role="search" action="{{ route('jelajahiBarang') }}" method="GET">
-                        <input 
-                    type="text" 
-                    id="search-barang" 
-                    name="search" 
-                    class="form-control mr-2" 
-                    placeholder="Cari Barang..." 
-                    value="{{ request('search') ?? '' }}">
-                        <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i> Cari</button>
-                    </form>
-                </div>
-            </nav>
+             <nav class="navbar" style="background-color: #edf5ff;">
+            <div class="container-fluid">
+                <form class="d-flex" role="search" action="{{ route('jelajahiBarang') }}" method="GET">
+                    <input 
+                        type="text" 
+                        id="search-barang" 
+                        name="search" 
+                        class="form-control mr-2" 
+                        placeholder="Cari Barang..." 
+                        value="{{ request('search') ?? '' }}">
+                    <button class="btn btn-outline-success" type="submit"><i class="fas fa-search"></i> Cari</button>
+                </form>
+            </div>
+        </nav>
             
             <div class="container my-5">
                 <div class="row">
                     @foreach($barang as $item)
-                    <div class="col-md-3 mb-5">
+                    <div class="col-md-6 col-lg-4 col-xl-3 mb-5">
                         <div class="card">
                             <div class="card-body text-center">
                                 <h5 class="card-title">{{ $item->nama_barang }}</h5>
@@ -121,7 +120,7 @@
             </div>
         </div>
     </div>
-
+    
     <!-- Memuat jQuery terlebih dahulu -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Memuat Popper.js dan Bootstrap JS setelah jQuery -->
@@ -132,5 +131,24 @@
     $('#reportPostId').val(barangId); // ID barang dari tabel 'barang'
     $('#reportModalLabel').text(`Laporkan Postingan: ${barangName}`);
 }
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    const menuToggle = document.createElement('button');
+    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+    menuToggle.classList.add('btn', 'btn-outline-secondary', 'd-md-none');
+    menuToggle.style.position = 'fixed';
+    menuToggle.style.top = '10px';
+    menuToggle.style.left = '10px';
+    menuToggle.style.zIndex = '1100';
+
+    menuToggle.addEventListener('click', function () {
+        const sidebar = document.querySelector('.sidebar');
+        sidebar.classList.toggle('show');
+    });
+
+    document.body.prepend(menuToggle);
+});
+
     </script>
     

@@ -39,7 +39,7 @@
 
 /* Content */
 .content {
-    margin-left: 250px; /* Sesuaikan dengan lebar sidebar */
+    margin-left: 0px; /* Sesuaikan dengan lebar sidebar */
     padding: 20px;
     width: 100%;
 }
@@ -139,4 +139,48 @@
 #detailBtn:hover {
     background-color:#5b5a5a;
     color: #333;
+}
+.item-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        z-index: 1050;
+    }
+
+    .sidebar.show {
+        transform: translateX(0);
+    }
+
+    .main-container {
+        flex-direction: column;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .navbar {
+        padding: 10px;
+    }
+
+    .card {
+        margin-bottom: 15px;
+    }
+
+    .item-image {
+        height: 150px;
+    }
+}
+
+@media (min-width: 768px) {
+    .content {
+        padding-left: 250px;
+    }
 }
