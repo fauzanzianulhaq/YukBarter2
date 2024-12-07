@@ -75,7 +75,7 @@
                               </div>
                               <div class="form-group">
                                   <label for="nomor_wa">Nomor Whatsapp</label>
-                                  <input type="text" class="form-control" id="nomor_wa" name="nomor_wa" placeholder="Masukan Nomor Whatsapp" value="{{ old('nomor_wa') }}">
+                                  <input type="text" class="form-control" id="nomor_wa" name="nomor_wa" placeholder="awali dengan 62 contohnya 628123456789" value="{{ old('nomor_wa') }}">
                                   @error('nomor_wa')<small class="text-danger">{{ $message }}</small>@enderror
                               </div>
                               <div class="form-group">

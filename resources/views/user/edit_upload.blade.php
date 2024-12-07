@@ -10,20 +10,20 @@
 </head>
 <body>
     <div class="main-container">
-      <div class="sidebar bg-light border-right">
-        <img src="/images/logo_yukbarter.png" alt="" width="190px" class="logo_atas">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-                <a class="nav-link" href="beranda"><i class="fas fa-home"></i> Beranda</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="jelajahi-barang"><i class="fas fa-search"></i> Jelajahi Barang</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="profile"><i class="fas fa-user"></i> Profil</a>
-            </li>
-        </ul>
-      </div>
+        <div class="sidebar bg-light border-right">
+            <img src="/images/logo_yukbarter.png" alt="" width="190px" class="logo_atas">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/beranda"><i class="fas fa-home"></i> Beranda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/jelajahi-barang"><i class="fas fa-search"></i> Jelajahi Barang</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/user/profile"><i class="fas fa-user"></i> Profil</a>
+                </li>
+            </ul>
+        </div>
       <div class="content">
             <div class="container-fluid">
                 <div class="card">
